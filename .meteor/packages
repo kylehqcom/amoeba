@@ -5,8 +5,7 @@
 # but you can also edit it by hand.
 
 meteor-platform
-meteorhacks:kadira
-kadira:debug
-meteorhacks:kadira-profiler
-kadira:blaze-layout
 aldeed:collection2
+kadira:blaze-layout
+kadira:debug
+meteorhacks:kadira
