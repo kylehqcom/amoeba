@@ -1,0 +1,10 @@
+# OS filesystem metadata
+.DS_Store*
+ethumbs.db
+Thumbs.db
+
+# Meteor Specific
+settings.json
+
+# Don't ignore .gitignore files (used to keep empty directories)
+!.gitignore
