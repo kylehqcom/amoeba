@@ -1,12 +1,12 @@
 <body>
-  <div class="container">
-    <header>
-      <h1>Amoeba</h1>
-    </header>
-    <div class="stage">
-        {{#each foodCells}}
-            {{> _foodCell}}
-        {{/each}}
-    </div>
-  </div>
+	<div class="container">
+	  <header>
+        <h1>Amoeba</h1>
+	  </header>
+      {{> canvas}}
+	</div>
 </body>
+
+<template name="canvas">
+    <canvas id="canvas">Best you upgrade your browser - Canvas support required.</canvas>
+</template>
