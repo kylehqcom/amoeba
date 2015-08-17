@@ -4,10 +4,10 @@ Canvas.constants = {
     height: 400,
     width: 600,
     cells: {
-        minimum: 50 // in percent
+        minimum: 30 // in percent
     },
     cell: {
-        radius: 10
+        radius: 5
     }
 };
 
@@ -80,7 +80,7 @@ Canvas.hasMinimumCellCount = function (i) {
 Canvas.renderCell = function() {
     var path = new Path2D(),
         coords = this.generateRandomCoordinates();
-    path.arc(coords.x, coords.y, this.constants.cell.radius, 0, Utils.degreesToRadians(360));
+    path.arc(coords.x, coords.y, this.constants.cell.radius, 0, Util.degreesToRadians(360));
     ctx.fillStyle = Colour.generateHexColour();
     ctx.fill(path);
 };
