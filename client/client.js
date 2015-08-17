@@ -7,10 +7,10 @@ if (Meteor.isClient) {
 
         // Check if we have enough cells on the canvas at startup
         i = 1;
-        while (!Canvas.hasMinimumCellCount()) {
+        while (!Canvas.hasMinimumCellCount(i)) {
 
           // Always have a break on while loops!
-          if (i > 1000) {
+          if (i > 100000) {
               console.log("we broke " + i);
               break;
           }

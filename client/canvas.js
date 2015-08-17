@@ -4,10 +4,10 @@ Canvas.constants = {
     height: 400,
     width: 600,
     cells: {
-        minimum: 2 // in percent
+        minimum: 50 // in percent
     },
     cell: {
-        radius: 5
+        radius: 10
     }
 };
 
@@ -32,6 +32,7 @@ Canvas.initialize = function (selector, options) {
     ctx = canvas[0].getContext("2d");
 
     // Draw vertical grid lines
+    ctx.beginPath();
     for (var x = 0.5; x < options.width; x += 10) {
       ctx.moveTo(x, 0);
       ctx.lineTo(x, options.height);
@@ -42,6 +43,9 @@ Canvas.initialize = function (selector, options) {
       ctx.moveTo(0, y);
       ctx.lineTo(options.width, y);
     }
+
+    ctx.strokeStyle = "#eee";
+    ctx.stroke();
 };
 
 /**
@@ -50,8 +54,8 @@ Canvas.initialize = function (selector, options) {
  */
 Canvas.generateRandomCoordinates = function () {
     return {
-        x : Random.number(Canvas.constants.width),
-        y : Random.number(Canvas.constants.height)
+        x : Random.number(0, Canvas.constants.width),
+        y : Random.number(0, Canvas.constants.height)
     };
 };
 
@@ -61,7 +65,7 @@ Canvas.generateRandomCoordinates = function () {
  * covered by cells. Used to pre-load new cell after initialisation.
  * @returns {Boolean}
  */
-Canvas.hasMinimumCellCount = function () {
+Canvas.hasMinimumCellCount = function (i) {
     // Note i should be the count of a Cells collection
     i = i || 1;
     totalArea = Canvas.constants.width * Canvas.constants.height;
@@ -70,7 +74,8 @@ Canvas.hasMinimumCellCount = function () {
 }
 
 /**
- *
+ * Note that at this stage we do not take into account any existing cells on the canvas.
+ * Therefore a cell may take the position of an existing cell.
  */
 Canvas.renderCell = function() {
     var path = new Path2D(),
