@@ -4,10 +4,10 @@ Canvas.constants = {
     height: 400,
     width: 600,
     cells: {
-        minimum: 30 // in percent
+        minimum: 50 // in percent
     },
     cell: {
-        radius: 5
+        radius: 20
     }
 };
 
@@ -33,15 +33,15 @@ Canvas.initialize = function (selector, options) {
 
     // Draw vertical grid lines
     ctx.beginPath();
-    for (var x = 0.5; x < options.width; x += 10) {
-      ctx.moveTo(x, 0);
-      ctx.lineTo(x, options.height);
+    for ( var x = 0.5; x < options.width; x += 10 ) {
+      ctx.moveTo( x, 0 );
+      ctx.lineTo( x, options.height );
     }
 
     // Draw horizontal grid lines
-    for (var y = 0.5; y < options.height; y += 10) {
-      ctx.moveTo(0, y);
-      ctx.lineTo(options.width, y);
+    for ( var y = 0.5; y < options.height; y += 10 ) {
+      ctx.moveTo( 0, y );
+      ctx.lineTo( options.width, y );
     }
 
     ctx.strokeStyle = "#eee";
@@ -54,8 +54,8 @@ Canvas.initialize = function (selector, options) {
  */
 Canvas.generateRandomCoordinates = function () {
     return {
-        x : Random.number(0, Canvas.constants.width),
-        y : Random.number(0, Canvas.constants.height)
+        x : Random.number( 0, Canvas.constants.width ),
+        y : Random.number( 0, Canvas.constants.height )
     };
 };
 
@@ -69,8 +69,8 @@ Canvas.hasMinimumCellCount = function (i) {
     // Note i should be the count of a Cells collection
     i = i || 1;
     totalArea = Canvas.constants.width * Canvas.constants.height;
-    cellArea  = i * ((this.constants.cell.radius * this.constants.cell.radius) * Math.PI);
-    return (this.constants.cells.minimum < ((cellArea/totalArea) * 100));
+    cellArea  = i * ( ( this.constants.cell.radius * this.constants.cell.radius ) * Math.PI );
+    return ( this.constants.cells.minimum < ( ( cellArea/totalArea ) * 100 ) );
 }
 
 /**
@@ -80,7 +80,7 @@ Canvas.hasMinimumCellCount = function (i) {
 Canvas.renderCell = function() {
     var path = new Path2D(),
         coords = this.generateRandomCoordinates();
-    path.arc(coords.x, coords.y, this.constants.cell.radius, 0, Util.degreesToRadians(360));
+    path.arc ( coords.x, coords.y, this.constants.cell.radius, 0, Numbers.degreesToRadians(360) );
     ctx.fillStyle = Colour.generateHexColour();
-    ctx.fill(path);
+    ctx.fill( path );
 };
