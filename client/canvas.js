@@ -5,6 +5,12 @@ Canvas = {};
  */
 var ctx;
 
+Meteor.subscribe( "cells" );
+
+CellCollection = new Mongo.Collection( "cells" );
+console.log('Client ' + CellCollection.find().count());
+Meteor.call('sendLogMessage');
+
 /**
  * Initialize a Canvas
  * @argument {String} selector  A css selector to the Canvas element, generally an id
@@ -13,8 +19,8 @@ var ctx;
  */
 Canvas.initialize = function (selector, options) {
     options = options || {};
-    options.height = options.height || Canvas.constants.height;
-    options.width = options.width || Canvas.constants.width;
+    options.height = options.height || App.constants.canvas.height;
+    options.width = options.width || App.constants.canvas.width;
 
     canvas = $(selector);
     canvas.attr({ "height" : options.height, "width" : options.width });
@@ -43,8 +49,8 @@ Canvas.initialize = function (selector, options) {
  */
 Canvas.generateRandomCoordinates = function () {
     return {
-        x : Random.number( 0, Canvas.constants.width ),
-        y : Random.number( 0, Canvas.constants.height )
+        x : Random.number( 0, App.constants.canvas.width ),
+        y : Random.number( 0, App.constants.canvas.height )
     };
 };
 
@@ -52,10 +58,9 @@ Canvas.generateRandomCoordinates = function () {
  * Note that at this stage we do not take into account any existing cells on the canvas.
  * Therefore a cell may take the position of an existing cell.
  */
-Canvas.renderCell = function() {
-    var path = new Path2D(),
-        coords = this.generateRandomCoordinates();
-    path.arc ( coords.x, coords.y, App.constants.cell.radius, 0, Numbers.degreesToRadians(360) );
-    ctx.fillStyle = Colour.generateHexColour();
+Canvas.renderCell = function( cell ) {
+    var path = new Path2D();
+    path.arc ( cell.x, cell.y, App.constants.cell.radius, 0, Numbers.degreesToRadians(360) );
+    ctx.fillStyle = cell.colour;
     ctx.fill( path );
 };
