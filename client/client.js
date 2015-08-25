@@ -16,7 +16,6 @@ if ( Meteor.isClient ) {
           }
 
           Canvas.renderCell();
-          console.log( i );
           i ++;
         }
     };

@@ -1,16 +1,5 @@
 Canvas = {};
 
-Canvas.constants = {
-    height: 400,
-    width: 600,
-    cells: {
-        minimum: 50 // in percent
-    },
-    cell: {
-        radius: 20
-    }
-};
-
 /**
  * This Canvas elements context
  */
@@ -60,27 +49,13 @@ Canvas.generateRandomCoordinates = function () {
 };
 
 /**
- * Does this canvas instance have the minimum number of
- * cells by checking the size of this canvas over the amount of area
- * covered by cells. Used to pre-load new cell after initialisation.
- * @returns {Boolean}
- */
-Canvas.hasMinimumCellCount = function (i) {
-    // Note i should be the count of a Cells collection
-    i = i || 1;
-    totalArea = Canvas.constants.width * Canvas.constants.height;
-    cellArea  = i * ( ( this.constants.cell.radius * this.constants.cell.radius ) * Math.PI );
-    return ( this.constants.cells.minimum < ( ( cellArea/totalArea ) * 100 ) );
-}
-
-/**
  * Note that at this stage we do not take into account any existing cells on the canvas.
  * Therefore a cell may take the position of an existing cell.
  */
 Canvas.renderCell = function() {
     var path = new Path2D(),
         coords = this.generateRandomCoordinates();
-    path.arc ( coords.x, coords.y, this.constants.cell.radius, 0, Numbers.degreesToRadians(360) );
+    path.arc ( coords.x, coords.y, App.constants.cell.radius, 0, Numbers.degreesToRadians(360) );
     ctx.fillStyle = Colour.generateHexColour();
     ctx.fill( path );
 };
