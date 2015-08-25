@@ -5,7 +5,7 @@
 if ( ! CellCollection.find().count() ) {
     var count = 1;
     while ( ! Cells.hasMinimumCellCount( count ) ) {
-        if ( count > 5 ) {
+        if ( count > 1000 ) {
             console.log( "We broke out of the fixture import - check code!" );
             break;
         }
@@ -16,3 +16,4 @@ if ( ! CellCollection.find().count() ) {
 }
 
 console.log('Server ' + CellCollection.find().count());
+

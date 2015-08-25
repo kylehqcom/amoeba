@@ -5,10 +5,6 @@ Canvas = {};
  */
 var ctx;
 
-Meteor.subscribe( "cells" );
-
-CellCollection = new Mongo.Collection( "cells" );
-console.log('Client ' + CellCollection.find().count());
 Meteor.call('sendLogMessage');
 
 /**
