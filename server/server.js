@@ -5,6 +5,5 @@ Meteor.startup(function () {
 /**
  * Also instantiate any NPM Packages for the app.
  */
-//var NPMChance = Meteor.npmRequire('chance');
-//chance = new NPMChance();
-//console.log(chance.natural());
+var NPMChance = Meteor.npmRequire('chance');
+chance = new NPMChance();

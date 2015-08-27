@@ -1,3 +1,8 @@
+// Add indexes to this Collection
+Meteor.startup( function () {
+    CellCollection._ensureIndex( { "x": 1, "y" : 1 } );
+});
+
 CellCollection = new Mongo.Collection( "cells" );
 
 var Schemas = {};
@@ -22,6 +27,19 @@ CellCollection.attachSchema( Schemas.Cell );
 Cells = {};
 
 /**
+ * Play delete method to confirm reactivity
+ * @returns { Bool }
+ */
+Cells.deleteCell = function (id) {
+    var result = CellCollection.findOne( Constants.query.viewport, { limit : 1 });
+    if (result) {
+        return ( CellCollection.remove( { "_id" : result._id } ) );
+    }
+
+    return false;
+};
+
+/**
  * Refer Schemas.Cell for expected object values
  * @param { Object }
  * @return { String } The new _id or an error object if a callback provided
@@ -31,15 +49,29 @@ Cells.insertCell = function ( cell, callBack ) {
 };
 
 /**
- * Does this canvas instance have the minimum number of
- * cells by checking the size of this canvas over the amount of area
+ * Generate a Cell with random values
+ * @return { Object }
+ */
+Cells.generateCell = function () {
+    return {
+        "colour" : chance.color( { format : 'hex' } ),
+        "x"      : chance.integer( { 'min' : 0, 'max' : Constants.app.map.width } ),
+        "y"      : chance.integer( { 'min' : 0, 'max' : Constants.app.map.height } )
+
+        //"x"      : chance.integer( { 'min' : -1 * Constants.app.map.width, 'max' : Constants.app.map.width } ),
+        //"y"      : chance.integer( { 'min' : -1 * Constants.app.map.height, 'max' : Constants.app.map.height } )
+    };
+};
+
+/**
+ * Does this map instance have the minimum number of
+ * cells by checking the size of this map over the amount of area
  * covered by cells. Used to pre-load new cell after initialisation.
  * @returns {Boolean}
  */
 Cells.hasMinimumCellCount = function ( currentCount ) {
-    // Note i should be the count of a Cells collection
-    currentCount = currentCount || 0;
-    totalArea = App.constants.canvas.width * App.constants.canvas.height;
-    cellArea  = currentCount * ( ( App.constants.cell.radius * App.constants.cell.radius ) * Math.PI );
-    return ( App.constants.cells.minimum < ( ( cellArea / totalArea ) * 100 ) );
+    currentCount = currentCount || CellCollection.find().count();
+    totalArea = Constants.app.map.width * Constants.app.map.height;
+    cellArea  = currentCount * ( ( Constants.app.cell.radius * Constants.app.cell.radius ) * Math.PI );
+    return ( Constants.app.cells.minimum < ( ( cellArea / totalArea ) * 100 ) );
 };
