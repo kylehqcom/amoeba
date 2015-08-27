@@ -2,6 +2,8 @@
 .DS_Store*
 ethumbs.db
 Thumbs.db
+.project
+.settings
 
 # Meteor Specific
 settings.json
