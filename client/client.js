@@ -1,7 +1,6 @@
 
 var handle = Meteor.subscribe( "cells" ),
-    CellCollection = new Mongo.Collection( "cells" ),
-    deletes = true;
+    CellCollection = new Mongo.Collection( "cells" );
 
 // Watch the onReady for the subscription & render cell results
 Tracker.autorun( function() {
@@ -15,15 +14,10 @@ Tracker.autorun( function() {
 });
 
 
-if ( handle.ready() && ! CellCollection.find().count() ) {
-  deletes = false;
-}
-
 var boom = setInterval( function() {
     console.log( "do doc deleted" );
     Meteor.call( 'cells.deleteCell' );
+    if ( ! CellCollection.find().count() ) {
+        clearInterval( boom );
+    }
 }, 1000);
-
-if ( ! deletes ) {
-    clearInterval( boom );
-}
