@@ -1,11 +1,9 @@
 Meteor.methods({
-    'cells.deleteCell' : function() {
-        var result = Cells.deleteCell();
-        console.log('server delete ' + result );
-        return result;
+    "cells.deleteCell" : function(id) {
+        Cells.deleteCell(id);
     },
 
-    'cells.insertCell' : function( cell, callback ) {
+    "cells.insertCell" : function( cell, callback ) {
         Cells.insertCell( cell, callback );
     }
 });

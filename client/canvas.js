@@ -8,29 +8,24 @@ var ctx;
 /**
  * Initialize a Canvas
  * @argument {String} selector  A css selector to the Canvas element, generally an id
- * @argument {Object} options   Additional options, eg height & width values
  * @returns  Void
  */
-Canvas.initialize = function (selector, options) {
-    options = options || {};
-    options.height = options.height || Constants.app.viewport.height;
-    options.width = options.width || Constants.app.viewport.width;
-
+Canvas.initialize = function (selector) {
     canvas = $(selector);
-    canvas.attr({ "height" : options.height, "width" : options.width });
+    canvas.attr({ "height" : Constants.app.viewport.height, "width" : Constants.app.viewport.width });
     ctx = canvas[0].getContext("2d");
 
     // Draw vertical grid lines
     ctx.beginPath();
-    for ( var x = 0.5; x < options.width; x += 10 ) {
+    for ( var x = 0.5; x < Constants.app.viewport.width; x += 10 ) {
       ctx.moveTo( x, 0 );
-      ctx.lineTo( x, options.height );
+      ctx.lineTo( x, Constants.app.viewport.height );
     }
 
     // Draw horizontal grid lines
-    for ( var y = 0.5; y < options.height; y += 10 ) {
+    for ( var y = 0.5; y < Constants.app.viewport.height; y += 10 ) {
       ctx.moveTo( 0, y );
-      ctx.lineTo( options.width, y );
+      ctx.lineTo( Constants.app.viewport.width, y );
     }
 
     ctx.strokeStyle = "#eee";
