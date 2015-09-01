@@ -15,5 +15,3 @@ while ( ! Cells.hasMinimumCellCount() ) {
     );
     cellCount ++;
 }
-
-console.log('Server: In total we have this many cells ' + CellCollection.find().count());
