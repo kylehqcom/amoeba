@@ -31,13 +31,7 @@ Cells = {};
  * @returns { Bool }
  */
 Cells.deleteCell = function (id) {
-    // TODO Pass in an id value
-    var result = CellCollection.findOne( Constants.query.viewport, { limit : 1 });
-    if (result) {
-        return ( CellCollection.remove( { "_id" : result._id } ) );
-    }
-
-    return false;
+    return ( CellCollection.remove( { "_id" : id } ) );
 };
 
 /**

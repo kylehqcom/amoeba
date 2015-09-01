@@ -1,9 +1,5 @@
 Canvas = {};
 
-Template.canvas.onRendered(function () {
-    // Canvas.initialize( Constants.app.canvas.selector );
-});
-
 // Watch the onReady for the subscription & render cell results
 Tracker.autorun( function() {
     if ( CellViewportHandle.ready() ) {
