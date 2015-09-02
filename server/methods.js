@@ -1,5 +1,10 @@
 Meteor.methods({
     "canvas.cell.remove" : function( offsetX, offsetY ) {
+        // Best to be safe when using Collection.remove()
+        if ( _.isUndefined(offsetX) || _.isUndefined(offsetY) ) {
+            return;
+        }
+
         CellCollection.remove({
             x : { $lte : offsetX + Constants.app.cell.radius, $gte : offsetX - Constants.app.cell.radius },
             y : { $lte : offsetY + Constants.app.cell.radius, $gte : offsetY - Constants.app.cell.radius }
