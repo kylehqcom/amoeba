@@ -3,10 +3,6 @@ Template.actions.events( {
         Meteor.call( "cells.insertCell" );
     },
 
-    "click .increase" : function () {
-        Meteor.call( "cells.insertCell" );
-    },
-
     "click .remove" : function () {
         Meteor.call( "cells.deleteCell" );
     }

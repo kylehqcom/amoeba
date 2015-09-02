@@ -1,10 +1,19 @@
 Canvas = {};
 
+/**
+ * Remove a cell from the canvas from a clicks x & y offset
+ */
+Template.canvas.events( {
+    "click" : function (event, template) {
+        Meteor.call( "canvas.cell.remove" , event.offsetX, event.offsetY );
+    }
+} );
+
 // Watch the onReady for the subscription & render cell results
 Tracker.autorun( function() {
     if ( CellViewportHandle.ready() ) {
         Canvas.initialize( Constants.app.canvas.selector );
-        var results = CellCollection.find( Constants.query.viewport ).fetch();
+        var results = CellCollection.find( Constants.query.viewport.cells ).fetch();
         _.each( results, function ( result ) {
             Canvas.renderCell( result );
         });
