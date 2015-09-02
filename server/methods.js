@@ -1,4 +1,10 @@
 Meteor.methods({
+
+    /*
+     * Currently these methods are only for testing. eg: we won't allow a client
+     * to run a delete
+     */
+
     "canvas.cell.remove" : function( offsetX, offsetY ) {
         // Best to be safe when using Collection.remove()
         if ( _.isUndefined(offsetX) || _.isUndefined(offsetY) ) {
