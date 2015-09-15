@@ -1,0 +1,21 @@
+{
+  "name": "amoeba",
+  "version": "0.0.1",
+  "homepage": "https://github.com/kylehq/amoeba",
+  "authors": [
+    "Kyle Clarke <git@kylehq.com>"
+  ],
+  "description": "Bower packages for Amoeba",
+  "license": "MIT",
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "fabric.js": "fabric#~1.5.0"
+  }
+}
