@@ -17,13 +17,13 @@ Schemas.Player = new SimpleSchema({
         type: Number,
         label: "The radius of a player"
     },
-    x: {
+    left: {
         type: Number,
-        label: "Position X (pixels)"
+        label: "Left position (pixels)"
     },
-    y: {
+    top: {
         type: Number,
-        label: "Position Y (pixels)"
+        label: "Top position (pixels)"
     }
 });
 
@@ -47,9 +47,8 @@ Players.insertPlayer = function ( player, callBack ) {
 Players.generatePlayer = function () {
     return {
         "colour" : chance.color( { format : 'hex' } ),
-        "x"      : Constants.app.viewport.width / 2,
-        "y"      : Constants.app.viewport.height / 2,
+        "left"   : Constants.app.viewport.width / 2,
+        "top"    : Constants.app.viewport.height / 2,
         "radius" : Constants.app.player.radius
     };
 };
-

@@ -12,13 +12,17 @@ Schemas.Cell = new SimpleSchema({
         label: "Colour (hex)",
         max: 7
     },
-    x: {
+    radius: {
         type: Number,
-        label: "Position X (pixels)"
+        label: "The radius of a cell"
     },
-    y: {
+    left: {
         type: Number,
-        label: "Position Y (pixels)"
+        label: "Left position (pixels)"
+    },
+    top: {
+        type: Number,
+        label: "Top position (pixels)"
     }
 });
 
@@ -50,9 +54,9 @@ Cells.insertCell = function ( cell, callBack ) {
 Cells.generateCell = function () {
     return {
         "colour" : chance.color( { format : 'hex' } ),
-        "x"      : chance.integer( { 'min' : 0, 'max' : Constants.app.map.width } ),
-        "y"      : chance.integer( { 'min' : 0, 'max' : Constants.app.map.height } )
-
+        "left"   : chance.integer( { 'min' : 0, 'max' : Constants.app.map.width } ),
+        "top"    : chance.integer( { 'min' : 0, 'max' : Constants.app.map.height } ),
+        "radius" : Constants.app.cell.radius
         //"x"      : chance.integer( { 'min' : -1 * Constants.app.map.width, 'max' : Constants.app.map.width } ),
         //"y"      : chance.integer( { 'min' : -1 * Constants.app.map.height, 'max' : Constants.app.map.height } )
     };

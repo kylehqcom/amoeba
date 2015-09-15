@@ -4,7 +4,7 @@ Canvas = {};
  * Remove a cell from the canvas from a clicks x & y offset
  */
 Template.canvas.events( {
-    "click" : function (event, template) {
+    "click" : function ( event, template ) {
         Meteor.call( "canvas.cell.remove" , event.offsetX, event.offsetY );
     }
 } );
@@ -12,11 +12,20 @@ Template.canvas.events( {
 // Watch the onReady for the subscription & render cell results
 Tracker.autorun( function() {
     if ( CellViewportHandle.ready() ) {
-        Canvas.initialize( Constants.app.canvas.selector );
-        var results = CellCollection.find( Constants.query.viewport.cells ).fetch();
-        _.each( results, function ( result ) {
-            Canvas.renderCell( result );
+
+        // Cache these values, there's no point rendering all of the cells
+
+        var cells = CellCollection.find( Constants.query.viewport.cells ).fetch();
+        _.each( cells, function ( cell ) {
+            Canvas.renderCell( cell );
         });
+
+        //if ( PlayerViewportHandle.ready() ) {
+        //   var players = PlayerCollection.find( Constants.query.viewport.cells ).fetch();
+        //    _.each( players, function ( player ) {
+        //        Canvas.renderCell( player );
+        //    });
+        //}
     }
 });
 
@@ -30,26 +39,32 @@ var ctx;
  * @argument {String} selector  A css selector to the Canvas element, generally an id
  * @returns  Void
  */
-Canvas.initialize = function (selector) {
-    canvas = $(selector);
-    canvas.attr({ "height" : Constants.app.viewport.height, "width" : Constants.app.viewport.width });
-    ctx = canvas[0].getContext("2d");
+Canvas.initialize = function ( selector ) {
+    canvasElm = $( selector );
+    canvasElm.attr({
+        "height" : Constants.app.viewport.height,
+        "width" : Constants.app.viewport.width
+    });
 
-    // Draw vertical grid lines
-    ctx.beginPath();
-    for ( var x = 0.5; x < Constants.app.viewport.width; x += 10 ) {
-      ctx.moveTo( x, 0 );
-      ctx.lineTo( x, Constants.app.viewport.height );
+     // Draw the grid lines [x1, y1, x2, y2]
+    for ( var i = 0; i < Constants.app.viewport.width; i += 10 ) {
+        // Horizontal line
+        canvas.add(
+            new fabric.Line(
+                [ 0, i, Constants.app.viewport.width, i ],
+                { strokeWidth: 0.1, stroke: "eee" }
+            )
+        );
+
+        // Vertical line
+        canvas.add(
+            new fabric.Line(
+                [ i, 0, i, Constants.app.viewport.height],
+                { strokeWidth: 0.1, stroke: "eee" }
+            )
+        );
+
     }
-
-    // Draw horizontal grid lines
-    for ( var y = 0.5; y < Constants.app.viewport.height; y += 10 ) {
-      ctx.moveTo( 0, y );
-      ctx.lineTo( Constants.app.viewport.width, y );
-    }
-
-    ctx.strokeStyle = "#eee";
-    ctx.stroke();
 };
 
 /**
@@ -57,8 +72,9 @@ Canvas.initialize = function (selector) {
  * Therefore a cell may take the position of an existing cell.
  */
 Canvas.renderCell = function( cell ) {
-    var path = new Path2D();
-    path.arc ( cell.x, cell.y, Constants.app.cell.radius, 0, Numbers.degreesToRadians(360) );
-    ctx.fillStyle = cell.colour;
-    ctx.fill( path );
+    canvas.add(
+        new fabric.Circle({
+            radius: cell.radius, fill: cell.colour, left: cell.left, top: cell.top, _id: cell._id
+        })
+    );
 };

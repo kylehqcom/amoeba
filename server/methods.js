@@ -5,15 +5,15 @@ Meteor.methods({
      * to run a delete
      */
 
-    "canvas.cell.remove" : function( offsetX, offsetY ) {
+    "canvas.cell.remove" : function( left, top ) {
         // Best to be safe when using Collection.remove()
-        if ( _.isUndefined(offsetX) || _.isUndefined(offsetY) ) {
+        if ( _.isUndefined(left) || _.isUndefined(top) ) {
             return;
         }
 
         CellCollection.remove({
-            x : { $lte : offsetX + Constants.app.cell.radius, $gte : offsetX - Constants.app.cell.radius },
-            y : { $lte : offsetY + Constants.app.cell.radius, $gte : offsetY - Constants.app.cell.radius }
+            x : { $lte : left + Constants.app.cell.radius, $gte : left - Constants.app.cell.radius },
+            y : { $lte : top + Constants.app.cell.radius, $gte : top - Constants.app.cell.radius }
         });
     },
 
