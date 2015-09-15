@@ -6,13 +6,11 @@
 
 meteor-platform
 aldeed:collection2
-kadira:blaze-layout
-kadira:debug
-meteorhacks:kadira
 meteorhacks:npm
 
 
 npm-container
+meteorhacks:kadira
+kadira:debug
+kadira:blaze-layout
 reactive-var
-velocity:html-reporter
-sanjo:jasmine
