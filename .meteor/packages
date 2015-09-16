@@ -14,3 +14,5 @@ meteorhacks:kadira
 kadira:debug
 kadira:blaze-layout
 reactive-var
+accounts-password
+accounts-ui
