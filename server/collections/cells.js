@@ -1,8 +1,3 @@
-// Add indexes to this Collection
-Meteor.startup( function () {
-    CellCollection._ensureIndex( { "x": 1, "y" : 1 } );
-});
-
 CellCollection = new Mongo.Collection( "cells" );
 
 var Schemas = {};
@@ -18,13 +13,16 @@ Schemas.Cell = new SimpleSchema({
     },
     left: {
         type: Number,
-        label: "Left position (pixels)"
+        label: "Left position (pixels)",
+        index: 1
     },
     top: {
         type: Number,
-        label: "Top position (pixels)"
+        label: "Top position (pixels)",
+        index: 1
     }
 });
+
 
 CellCollection.attachSchema( Schemas.Cell );
 

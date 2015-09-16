@@ -3,11 +3,11 @@ Canvas = {};
 /**
  * Remove a cell from the canvas from a clicks x & y offset
  */
-Template.canvas.events( {
-    "click" : function ( event, template ) {
-        Meteor.call( "canvas.cell.remove" , event.offsetX, event.offsetY );
-    }
-} );
+//Template.canvas.events( {
+//    "click" : function ( event, template ) {
+//        Meteor.call( "canvas.cell.remove" , event.offsetX, event.offsetY );
+//    }
+//} );
 
 // Watch the onReady for the subscription & render cell results
 Tracker.autorun( function() {
@@ -15,10 +15,10 @@ Tracker.autorun( function() {
 
         // Cache these values, there's no point rendering all of the cells
 
-        var cells = CellCollection.find( Constants.query.viewport.cells ).fetch();
-        _.each( cells, function ( cell ) {
-            Canvas.renderCell( cell );
-        });
+        //var cells = CellCollection.find( Constants.query.viewport.cells ).fetch();
+        //_.each( cells, function ( cell ) {
+        //    Canvas.renderCell( cell );
+        //});
 
         //if ( PlayerViewportHandle.ready() ) {
         //   var players = PlayerCollection.find( Constants.query.viewport.cells ).fetch();
@@ -28,11 +28,6 @@ Tracker.autorun( function() {
         //}
     }
 });
-
-/**
- * This Canvas elements context
- */
-var ctx;
 
 /**
  * Initialize a Canvas
@@ -48,6 +43,7 @@ Canvas.initialize = function ( selector ) {
 
      // Draw the grid lines [x1, y1, x2, y2]
     for ( var i = 0; i < Constants.app.viewport.width; i += 10 ) {
+
         // Horizontal line
         canvas.add(
             new fabric.Line(
@@ -63,7 +59,6 @@ Canvas.initialize = function ( selector ) {
                 { strokeWidth: 0.1, stroke: "eee" }
             )
         );
-
     }
 };
 
@@ -71,10 +66,10 @@ Canvas.initialize = function ( selector ) {
  * Note that at this stage we do not take into account any existing cells on the canvas.
  * Therefore a cell may take the position of an existing cell.
  */
-Canvas.renderCell = function( cell ) {
-    canvas.add(
-        new fabric.Circle({
-            radius: cell.radius, fill: cell.colour, left: cell.left, top: cell.top, _id: cell._id
-        })
-    );
-};
+//Canvas.renderCell = function( cell ) {
+//    canvas.add(
+//        new fabric.Circle({
+//            radius: cell.radius, fill: cell.colour, left: cell.left, top: cell.top
+//        })
+//    );
+//};

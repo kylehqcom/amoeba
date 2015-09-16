@@ -8,6 +8,11 @@ PlayerCollection = new Mongo.Collection( "players" );
 
 var Schemas = {};
 Schemas.Player = new SimpleSchema({
+    user_id: {
+        type: Number,
+        label: "The radius of a player",
+        index: 1
+    },
     colour: {
         type: String,
         label: "Colour (hex)",
@@ -19,11 +24,13 @@ Schemas.Player = new SimpleSchema({
     },
     left: {
         type: Number,
-        label: "Left position (pixels)"
+        label: "Left position (pixels)",
+        index: 1
     },
     top: {
         type: Number,
-        label: "Top position (pixels)"
+        label: "Top position (pixels)",
+        index: 1
     }
 });
 
