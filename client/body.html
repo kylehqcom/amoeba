@@ -4,11 +4,12 @@
 			<h1>Amoeba</h1>
 			<p>{{> loginButtons }}</p>
 		</header>
+		{{ #if currentUser }}
+			{{> canvas }}
 
-		{{> canvas }}
+			{{> info }}
 
-		{{> info }}
-
-		{{> actions }}
+			{{> actions }}
+		{{/if}}
 	</div>
 </body>

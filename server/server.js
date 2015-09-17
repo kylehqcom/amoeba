@@ -8,4 +8,3 @@ Meteor.startup(function () {
 var NPMChance = Meteor.npmRequire('chance');
 chance = new NPMChance();
 
-// Players.insertPlayer(Players.generatePlayer());

@@ -7,16 +7,5 @@
 
 // Loaded on DOM ready
 Meteor.startup( function() {
-    $.getScript('vendor/js/fabric.js', function () {
-        canvas = new fabric.StaticCanvas( Constants.app.canvas.selector, {
-            height : Constants.app.viewport.height,
-            width : Constants.app.viewport.width
-        });
 
-        // Disable group selection
-        canvas.selection = false;
-
-        // Init the Canvas grid lines etc
-        Canvas.initialize( Constants.app.canvas.selector );
-    });
 });
