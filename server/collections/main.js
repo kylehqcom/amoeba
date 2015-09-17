@@ -10,8 +10,6 @@ while ( ! Cells.hasMinimumCellCount() ) {
         break;
     }
 
-    console.log(
-        Cells.insertCell( Cells.generateCell() )
-    );
+    console.log( Cells.insertCell( Cells.generateCell() ) );
     cellCount ++;
 }

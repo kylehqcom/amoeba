@@ -38,7 +38,7 @@ Players = {};
  * use this authenticated user via Meteor.
  *
  * @param { Object }
- * @return { String } The new _id or an error object if a callback provided
+ * @return { String } The new _id or an error object if a callback is provided
  */
 Players.insertPlayer = function ( player, callBack ) {
     return PlayerCollection.upsert(
@@ -61,9 +61,10 @@ Players.insertPlayer = function ( player, callBack ) {
  */
 Players.generatePlayer = function () {
     return {
-        colour : chance.color( { format : 'hex' } ),
-        left   : Constants.app.viewport.width / 2,
-        top    : Constants.app.viewport.height / 2,
-        radius : Constants.app.player.radius
+        user_id : Meteor.userId(),
+        colour  : chance.color( { format : 'hex' } ),
+        left    : Constants.app.viewport.width / 2,
+        top     : Constants.app.viewport.height / 2,
+        radius  : Constants.app.player.radius
     };
 };
