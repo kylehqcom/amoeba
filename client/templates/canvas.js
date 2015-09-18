@@ -1,5 +1,3 @@
-Canvas = {};
-
 Template.canvas.onRendered(function () {
     /**
      * Due to fabric thinking it is in "Node Server" mode if
@@ -44,6 +42,8 @@ Tracker.autorun( function () {
 
     }
 });
+
+Canvas = {};
 
 /**
  * Initialize a Canvas
