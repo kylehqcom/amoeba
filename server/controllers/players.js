@@ -15,8 +15,8 @@ Players.insertPlayer = function ( player, callBack ) {
             $set : {
                 user_id : Meteor.userId(),
                 colour  : player.colour,
-                left    : player.left,
-                top     : player.top,
+                x       : player.x,
+                y       : player.y,
                 radius  : player.radius
             }
         }, callBack );
@@ -35,9 +35,10 @@ Players.upsertPlayer = function ( player, callBack ) {
             user_id : Meteor.userId()
         }, {
             $set : {
-                left    : player.left,
-                top     : player.top,
-                radius  : player.radius
+                colour : player.colour,
+                radius : player.radius,
+                x      : player.x,
+                y      : player.y
             }
         }, callBack );
 };
@@ -50,8 +51,8 @@ Players.generatePlayer = function () {
     return {
         user_id : Meteor.userId(),
         colour  : chance.color( { format : 'hex' } ),
-        left    : (Constants.app.viewport.width / 2) - Constants.app.player.radius,
-        top     : (Constants.app.viewport.height / 2) - Constants.app.player.radius,
+        x       : (Constants.app.viewport.width / 2),
+        y       : (Constants.app.viewport.height / 2),
         radius  : Constants.app.player.radius
     };
 };

@@ -1,7 +1,12 @@
 Meteor.methods({
 
     "players.insert" : function() {
-        Players.insertPlayer( Players.generatePlayer() );
+        var instance = Player.getInstance();
+        if ( ! instance ) {
+            instance = Players.generatePlayer();
+        }
+
+        Players.insertPlayer( instance );
     },
 
     /**

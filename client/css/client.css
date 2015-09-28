@@ -1,0 +1,10 @@
+#grid,
+#player {
+    position: absolute;
+    top: 120px;
+    left: 0;
+}
+
+.info {
+    margin: 430px 0 0 0;
+}

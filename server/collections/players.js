@@ -17,17 +17,16 @@ Schemas.Player = new SimpleSchema({
         type: Number,
         label: "The radius of a player"
     },
-    left: {
+    x: {
         type: Number,
-        label: "Left position (pixels)",
+        label: "Centre X position (pixels)",
         index: 1
     },
-    top: {
+    y: {
         type: Number,
-        label: "Top position (pixels)",
+        label: "Centre Y position (pixels)",
         index: 1
     }
 });
 
 PlayerCollection.attachSchema( Schemas.Player );
-
