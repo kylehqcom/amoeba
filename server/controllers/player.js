@@ -32,10 +32,7 @@ Player.updateRadius = function ( by ) {
  * @param {Number} <OPTIONAL> by
  */
 Player.decrease = function ( by ) {
-
     by = by || 5;
-
-    console.log('In controller Player.decrease by: ' + by);
     return this.updateRadius( - by);
 };
 
@@ -44,9 +41,6 @@ Player.decrease = function ( by ) {
  * @param {Number} <OPTIONAL> by
  */
 Player.increase = function ( by ) {
-
     by = by || 5;
-
-    console.log('In controller Player.increase by: ' + by);
     return this.updateRadius( by );
 };
